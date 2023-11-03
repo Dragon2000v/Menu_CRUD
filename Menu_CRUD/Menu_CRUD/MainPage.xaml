@@ -4,30 +4,37 @@
              x:Class="Menu_CRUD.MainPage">
 
     <StackLayout Margin="15">
-        
-        <Entry x:Name="titleField" Placeholder="Enter title"/>
-        <Editor x:Name="descField" Placeholder="Enter desc" HeightRequest="200"/>
-        <Entry x:Name="imageField" Placeholder="Enter image"/>
-        <Entry x:Name="priceField" Placeholder="Enter price"/>
         <Button Text="Add item" Clicked="AddItemButton"/>
 
         <CollectionView x:Name="itemsCollection">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout BackgroundColor="#51b8b8" Padding="15">
-                        <Image Source="{Binding Image}" Aspect="AspectFill" />
-                        <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="25"/>
-                        <Label Text="{Binding Desc}"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Цена: " FontAttributes="Bold"  FontSize="12"/>
-                            <Label Text="{Binding Price}" FontAttributes="Bold" FontSize="12"/>
-                            <Label Text="$" FontAttributes="Bold" FontSize="12"/>
-                        </StackLayout>
+                    <StackLayout Margin="0,0,0,30">
+
+                        <Frame BackgroundColor="#51b8b8" CornerRadius="10" Padding="15" Margin="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="150"/>
+                                <Label Grid.Row="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="25" />
+                                <Label Grid.Row="2" Text="{Binding Desc}" />
+                                <StackLayout Orientation="Horizontal" Grid.Row="3">
+                                    <Label Text="Цена: " FontAttributes="Bold" FontSize="12"/>
+                                    <Label Text="{Binding Price}" FontAttributes="Bold" FontSize="12"/>
+                                    <Label Text="$" FontAttributes="Bold" FontSize="12"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="4">
+                                    <Button Text="Delete" Clicked="DeleteItemButton" BackgroundColor="#FF3B30" TextColor="White" />
+                                    <Button Text="Edit" Clicked="EditItemButton" BackgroundColor="#007ACC" TextColor="White" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
                     </StackLayout>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>         
+            </CollectionView.ItemTemplate>
         </CollectionView>
-            
     </StackLayout>
-
 </ContentPage>

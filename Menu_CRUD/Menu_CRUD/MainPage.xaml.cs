@@ -27,48 +27,29 @@ namespace Menu_CRUD
 
         private async void AddItemButton(object sender, EventArgs e)
         {
-            string title = titleField.Text.Trim();
-            string desc = descField.Text.Trim();
-            string image = imageField.Text.Trim();
-            int price = Convert.ToInt32(priceField.Text.Trim());
 
-            if(title.Length < 5)
-            {
-                await DisplayAlert("Error", "Title min 5", "Ok");
-                return;
-            }
-            else if (desc.Length < 10)
-            {
-                await DisplayAlert("Error", "Desc min 10", "Ok");
-                return;
-            }
-            else if (image.Length < 15)
-            {
-                await DisplayAlert("Error", "Image min 15", "Ok");
-                return;
-            }
-            else if (price < 20)
-            {
-                await DisplayAlert("Error", "Price min 20", "Ok");
-                return;
-            }
-
-            Item item = new Item
-            {
-                Title = title,
-                Desc = desc,
-                Image = image,
-                Price = price
-            };
-            App.Db.SaveItem(item);
-            ShowItems();
-
-            titleField.Text = "";
-            descField.Text = "";
-            imageField.Text = "";
-            priceField.Text = "";
-
+            await Navigation.PushAsync(new AddItem());
 
         }
+        private async void EditItemButton(object sender, EventArgs e)
+        {
+            Item itemToEdit = ((Button)sender).BindingContext as Item; // Получите элемент для редактирования
+            await Navigation.PushAsync(new EditItem(itemToEdit)); // Передайте элемент на страницу редактирования
+        }
+
+
+        private async void DeleteItemButton(object sender, EventArgs e)
+        {
+            Item itemToDelete = ((Button)sender).BindingContext as Item; // Получите элемент для удаления
+            bool result = await DisplayAlert("Confirmation", "Do you want to delete this item?", "Yes", "No");
+
+            if (result)
+            {
+                App.Db.DeleteItem(itemToDelete); // Удалите элемент из базы данных
+                ShowItems(); // Обновите список элементов
+            }
+        }
+
+
     }
 }

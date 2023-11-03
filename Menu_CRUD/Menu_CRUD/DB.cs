@@ -25,5 +25,16 @@ namespace Menu_CRUD
             return conn.Insert(item);
         }
 
+        public int DeleteItem(Item item)
+        {
+            return conn.Delete(item);
+        }
+
+        public int UpdateItem(Item item)
+        {
+            return conn.Update(item);
+        }
+
+
     }
 }
