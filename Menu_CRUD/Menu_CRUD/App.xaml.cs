@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.IO;
 
 namespace Menu_CRUD
 {
@@ -14,7 +15,7 @@ namespace Menu_CRUD
             {
                 if(db == null)
                 {
-                    db = new DB("db.sqlite3");
+                    db = new DB(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"db.sqlite3"));
                 }
                 return db;
             }

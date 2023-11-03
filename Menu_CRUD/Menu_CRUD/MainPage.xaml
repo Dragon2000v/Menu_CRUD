@@ -3,6 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Menu_CRUD.MainPage">
 
-    
+    <StackLayout Margin="15">
+        
+        <Entry x:Name="titleField" Placeholder="Enter title"/>
+        <Editor x:Name="descField" Placeholder="Enter desc" HeightRequest="200"/>
+        <Entry x:Name="imageField" Placeholder="Enter image"/>
+        <Entry x:Name="priceField" Placeholder="Enter price"/>
+        <Button Text="Add item" Clicked="AddItemButton"/>
+
+        <CollectionView x:Name="itemsCollection">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout BackgroundColor="#51b8b8" Padding="15">
+                        <Image Source="{Binding Image}" Aspect="AspectFill" />
+                        <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="25"/>
+                        <Label Text="{Binding Desc}"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Цена: " FontAttributes="Bold"  FontSize="12"/>
+                            <Label Text="{Binding Price}" FontAttributes="Bold" FontSize="12"/>
+                            <Label Text="$" FontAttributes="Bold" FontSize="12"/>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>         
+        </CollectionView>
+            
+    </StackLayout>
 
 </ContentPage>
